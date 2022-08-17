@@ -1,29 +1,26 @@
 package com.portafolio.feriavirtual.services;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
 import com.portafolio.feriavirtual.entities.Product;
 import com.portafolio.feriavirtual.repositories.ProductRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Transactional
+import java.util.List;
+
 @Service
 public class ProductService {
-    
-    private final ProductRepository productRepository;
+
     @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private ProductRepository productRepository;
+
     public List<Product> getAll(){
-        return this.productRepository.findAll();
+        return (List<Product>) productRepository.findAll();
     }
+
     public void create(Product product){
-        this.productRepository.save(product);
+        productRepository.save(product);
     }
-    
+
+
+
 }

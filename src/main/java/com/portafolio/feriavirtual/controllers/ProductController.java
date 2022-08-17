@@ -5,9 +5,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.portafolio.feriavirtual.entities.Message;
+
 import com.portafolio.feriavirtual.entities.Product;
 import com.portafolio.feriavirtual.services.ProductService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/product")
 @CrossOrigin("*")
 public class ProductController {
-    
-    private final ProductService productService;
+
     @Autowired
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+    private ProductService productService;
 
     @GetMapping("/list")
     public ResponseEntity<List<Product>> getAll(){
