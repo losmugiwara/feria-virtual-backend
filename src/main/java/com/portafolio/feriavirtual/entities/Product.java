@@ -1,9 +1,14 @@
 package com.portafolio.feriavirtual.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
+@Setter
+@Getter
 public class Product {
 
     @Id
@@ -16,8 +21,8 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
 
-    @OneToOne
-    @Column(name = "id_category")
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
 }

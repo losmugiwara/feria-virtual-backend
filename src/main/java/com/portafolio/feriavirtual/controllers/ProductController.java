@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/products")
 @CrossOrigin("*")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<List<Product>> getAll(){
         List<Product> foundProducts = this.productService.getAll();
         return new ResponseEntity<>(foundProducts, HttpStatus.OK);
