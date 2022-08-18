@@ -24,4 +24,6 @@ public class Contract {
 
     @OneToMany
     private List<Product> products;
+
+    private String address;
 }
