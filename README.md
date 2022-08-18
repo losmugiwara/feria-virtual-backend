@@ -25,3 +25,28 @@
 }
 </pre>
 
+
+<h3>Instrucciones para crear un producto:</h3>
+<hr>
+<h5><strong>Producto:</strong></h5>
+
+<pre>
+{
+    "nameProduct": "Naranja",
+    "stock": 4,
+    "category": {
+        "id": 1,
+        "nameCategory": "Frutas"
+    }
+}
+</pre>
+
+<h5><strong>Categoria:</strong></h5>
+
+<pre>
+{
+    "nameCategory": "Frutas"
+}
+</pre>
+
+
