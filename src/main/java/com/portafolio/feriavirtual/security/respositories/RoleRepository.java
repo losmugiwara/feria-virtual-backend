@@ -7,7 +7,7 @@ import com.portafolio.feriavirtual.security.enums.RoleList;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoleRepository extends JpaRepository <Role, Integer> {
+public interface RoleRepository extends JpaRepository <Role, Long> {
     Optional<Role> findByRoleName(RoleList roleName);
     
 }
