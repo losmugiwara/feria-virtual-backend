@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,15 @@ public class Contract {
 
     @OneToMany
     private List<Product> products;
+
+    @Column(name = "date_init")
+    private Date dateInit;
+
+    @Column(name = "date_end")
+    private Date dateEnd;
+
+    @Column(name = "date_delivery")
+    private Date dateDelivery;
 
     private String address;
 }
