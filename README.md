@@ -30,7 +30,7 @@
 </pre>
 
 
-<h3>Instrucciones para crear un producto:</h3>
+<h3>Instrucciones crear nuestros objetos desde un cliente:</h3>
 <hr>
 <h5><strong>Producto:</strong></h5>
 
