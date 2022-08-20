@@ -13,10 +13,11 @@ import org.hibernate.annotations.NaturalId;
 @Entity
 @Table(name = "users") 
 public class User {
-    
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUST_SEQ")
-    @SequenceGenerator(sequenceName = "customer_seq", allocationSize = 1, name = "CUST_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userid_generator")
+    @SequenceGenerator(name = "userid_generator", initialValue = 1, allocationSize = 1, sequenceName = "userid_seq")
     private Long id;
     @NotNull
     @NaturalId
