@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -22,6 +23,8 @@ public class User {
     @Column(unique = true)
     private String userName;
     @NotNull
+    @Email
+    @Column(length = 100)
     private String email;
     @NotNull
     private String password;

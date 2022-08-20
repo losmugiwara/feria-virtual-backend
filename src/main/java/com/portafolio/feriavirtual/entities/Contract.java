@@ -27,6 +27,9 @@ public class Contract {
     @OneToMany
     private List<Product> products;
 
+    @Column(name = "count")
+    private Integer count;
+
     @Column(name = "date_init")
     private Date dateInit;
 
