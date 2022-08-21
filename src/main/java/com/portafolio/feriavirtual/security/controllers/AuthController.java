@@ -20,6 +20,7 @@ import com.portafolio.feriavirtual.security.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -62,20 +63,23 @@ public class AuthController {
     }
     @PostMapping("/register")
     public ResponseEntity<Object> resgister(@Valid @RequestBody NewUser newUser, BindingResult bindingResult) {
+
+        System.out.println(newUser.getRoles());
+
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
         User user = new User(newUser.getUserName(), newUser.getEmail(),
                 passwordEncoder.encode(newUser.getPassword()));
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
-        if (newUser.getRoles().contains("admin"))
+        if (newUser.getRoles().contains("ROLE_ADMIN"))
             roles.add(roleService.getByRoleName(RoleList.ROLE_ADMIN).get());
         user.setRoles(roles);
         userService.save(user);
         return new ResponseEntity<>(new Message("Registro exitoso! Inicie sesión"), HttpStatus.CREATED);
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
