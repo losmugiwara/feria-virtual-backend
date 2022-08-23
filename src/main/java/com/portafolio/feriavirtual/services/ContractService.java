@@ -8,6 +8,7 @@ import com.portafolio.feriavirtual.security.respositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,22 +23,26 @@ public class ContractService implements ContractDao{
     private UserRepository userRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Contract> getAllContracts() {
         return (List<Contract>) contractRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Contract> getContractByIdCustomer(Long id) {
 
         return (List<Contract>) contractRepository.getContractsByIdCustomer(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Contract> getContractByIdProducer(Long id) {
         return (List<Contract>) contractRepository.getContractsByIdProducer(id);
     }
 
     @Override
+    @Transactional
     public Contract createContract(Contract contract) {
         
         Optional<User> userCustomerOptional = userRepository.findUserById(contract.getIdCustomer());
