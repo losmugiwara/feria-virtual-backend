@@ -7,6 +7,7 @@ C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\
 C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\SecuritySApplication.java
 C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\controllers\CategoryController.java
 C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\entities\MainUser.java
+C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\services\ContractService.java
 C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\entities\Message.java
 C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\dtos\JwtDto.java
 C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\dtos\LoginUser.java
@@ -27,3 +28,4 @@ C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\
 C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\services\CategoryService.java
 C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\services\UserService.java
 C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\entities\User.java
+C:\Users\franc\Documents\Portafolio\Backend\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\repositories\ContractRepository.java

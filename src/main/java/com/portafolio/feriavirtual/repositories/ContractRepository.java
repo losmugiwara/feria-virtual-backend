@@ -9,4 +9,5 @@ public interface ContractRepository extends CrudRepository<Contract, Long> {
 
     List<Contract> getContractsByIdCustomer(Long idCustomer);
     List<Contract> getContractsByIdProducer(Long idProducer);
+
 }

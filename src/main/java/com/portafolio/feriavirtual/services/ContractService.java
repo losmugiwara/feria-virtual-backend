@@ -26,8 +26,4 @@ public class ContractService {
         return (List<Contract>) contractRepository.getContractsByIdProducer(idProducer);
     }
 
-    public void saveContract(Contract contract){
-        contractRepository.save(contract);
-    }
-
 }
