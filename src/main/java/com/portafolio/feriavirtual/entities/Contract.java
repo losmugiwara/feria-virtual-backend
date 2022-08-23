@@ -19,10 +19,10 @@ public class Contract {
     private Long id;
 
     @Column(name = "id_customer")
-    private String idCustomer;
+    private Long idCustomer;
 
     @Column(name = "id_producer")
-    private String idProducer;
+    private Long idProducer;
 
     @OneToMany
     private List<Product> products;

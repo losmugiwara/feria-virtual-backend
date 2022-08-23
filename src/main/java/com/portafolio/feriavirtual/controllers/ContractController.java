@@ -3,6 +3,7 @@ package com.portafolio.feriavirtual.controllers;
 import com.portafolio.feriavirtual.entities.Contract;
 import com.portafolio.feriavirtual.services.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,12 @@ public class ContractController {
     @GetMapping("/{idProducer}")
     public List<Contract> getContractsByIdProducer(@PathVariable Long idProducer){
         return contractService.getContractByIdProducer(idProducer);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Contract createContract(@RequestBody Contract contract){
+        return contractService.createContract(contract);
     }
 
 }
