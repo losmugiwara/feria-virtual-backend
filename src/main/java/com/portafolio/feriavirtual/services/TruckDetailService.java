@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.portafolio.feriavirtual.dao.TruckDetailDao;
 import com.portafolio.feriavirtual.entities.TruckDetail;
 import com.portafolio.feriavirtual.repositories.TruckDetailRepository;
 
+@Service
 public class TruckDetailService implements TruckDetailDao {
 
     @Autowired
