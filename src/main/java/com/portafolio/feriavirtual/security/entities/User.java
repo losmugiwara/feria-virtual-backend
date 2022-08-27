@@ -51,19 +51,19 @@ public class User {
     private String businessName;
 
     @Null
-    @Column(name = "country", nullable = true)
+    @Column(name = "country")
     private String country;
 
     @Null
-    @Column(name = "city", nullable = true)
+    @Column(name = "city")
     private String city;
 
     @Null
-    @Column(name = "commune", nullable = true)
+    @Column(name = "commune")
     private String commune;
 
     @Null
-    @Column(name = "address", nullable = true)
+    @Column(name = "address")
     private String address;
 
 
