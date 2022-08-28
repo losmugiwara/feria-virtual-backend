@@ -64,8 +64,6 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<Object> resgister(@Valid @RequestBody NewUser newUser, BindingResult bindingResult) {
 
-        System.out.println(newUser.getRoles());
-
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
         User user = new User(newUser.getUserName(), newUser.getEmail(),
@@ -83,6 +81,28 @@ public class AuthController {
     @GetMapping("/users")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/register/account")
+    public ResponseEntity<Object> resgisterAccount(@Valid @RequestBody NewUser newUser, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors())
+            return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
+        User user = new User(newUser.getUserName(), newUser.getEmail(),
+                passwordEncoder.encode(newUser.getPassword()));
+        Set<Role> roles = new HashSet<>();
+        if (newUser.getRoles().contains("ROLE_CUSTOMER_EXTERNAL"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
+        if (newUser.getRoles().contains("ROLE_CUSTOMER_INTERNAL"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_INTERNAL).get());
+        if (newUser.getRoles().contains("ROLE_CONSULTANT"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_CONSULTANT).get());
+        if (newUser.getRoles().contains("ROLE_CARRIER"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_CARRIER).get());
+        user.setRoles(roles);
+        userService.save(user);
+        return new ResponseEntity<>(new Message("Usuario creado con exito!"), HttpStatus.CREATED);
     }
 
 }
