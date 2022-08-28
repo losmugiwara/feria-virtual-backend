@@ -26,7 +26,8 @@ public class TruckDetail {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "truckdetailid_generator")
     @SequenceGenerator(name = "truckdetailid_generator", initialValue = 1, allocationSize = 1, sequenceName = "truckdetailid_seq")
     private Long id;
-    private Long idCarrier;
+    private Long idTruck;
+    private Long idSale;
     private Date useDate;
     private String destiny;
     
