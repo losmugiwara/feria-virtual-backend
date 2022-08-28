@@ -44,9 +44,11 @@ public class TruckDetailService implements TruckDetailDao {
         Optional<TruckDetail> truckDetailOptional = truckDetailRepository.findById(id);
 
         if (truckDetailOptional.isPresent()) {
-            truckDetailOptional.get().setIdCarrier(truckDetail.getIdCarrier());
             truckDetailOptional.get().setUseDate(truckDetail.getUseDate());
             truckDetailOptional.get().setDestiny(truckDetail.getDestiny());
+            truckDetailOptional.get().setIdSale(truckDetail.getIdSale());
+            truckDetailOptional.get().setIdTruck(truckDetail.getIdTruck());
+
 
             TruckDetail truckDetailToUpdate;
 
