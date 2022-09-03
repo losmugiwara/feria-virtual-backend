@@ -27,8 +27,20 @@ public class UserService {
     public boolean existByUserName(String userName){
         return userRepository.existsByUserName(userName);
     }
-    public void save(User user){
+    public Boolean save(User user){
+
+        Optional<User> userOptionalEmail = userRepository.findUserByEmail(user.getEmail());
+        Optional<User> userOptionalUserName = userRepository.findByUserName(user.getUserName());
+
+        if (userOptionalEmail.isPresent()) {
+            return false;
+        }
+        if (userOptionalUserName.isPresent()) {
+            return false;
+        }
+
         userRepository.save(user);
+        return true;
     }
 
     public List<User> getAllUsers(){

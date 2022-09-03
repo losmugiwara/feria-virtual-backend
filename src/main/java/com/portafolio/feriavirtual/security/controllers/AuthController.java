@@ -69,12 +69,21 @@ public class AuthController {
         User user = new User(newUser.getUserName(), newUser.getEmail(),
                 passwordEncoder.encode(newUser.getPassword()));
         Set<Role> roles = new HashSet<>();
-        roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
+        if (newUser.getRoles().contains("ROLE_CUSTOMER_EXTERNAL"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
         if (newUser.getRoles().contains("ROLE_ADMIN"))
             roles.add(roleService.getByRoleName(RoleList.ROLE_ADMIN).get());
         user.setRoles(roles);
-        userService.save(user);
-        return new ResponseEntity<>(new Message("Registro exitoso! Inicie sesión"), HttpStatus.CREATED);
+
+
+        if(userService.save(user)){
+            return new ResponseEntity<>(new Message("Registro exitoso! Inicie sesión"), HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(new Message("Credenciales en uso, intenta con otro usuario o email"), HttpStatus.OK);
+        
+        
+        
+        
     }
 
     @PreAuthorize("hasRole('ADMIN')")
