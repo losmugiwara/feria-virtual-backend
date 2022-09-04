@@ -30,6 +30,12 @@ public class User {
     @NaturalId
     @Column(unique = true)
     private String userName;
+    @Column(name = "name")
+    @Null
+    private String name;
+    @Column(name = "last_name")
+    @Null
+    private String lastName;
     @NotNull
     @Email
     @Column(length = 100)
@@ -66,9 +72,6 @@ public class User {
     @Column(name = "address")
     private String address;
 
-
-
-
     public User() {
     }
 
@@ -89,6 +92,21 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return userName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getEmail() {
         return email;
     }
