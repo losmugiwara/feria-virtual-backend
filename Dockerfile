@@ -1,4 +1,4 @@
 FROM openjdk:11
-COPY "./target/feria-virtual-backend.jar" "app.jar"
+COPY "./target/security-0.0.1-SNAPSHOT.jar" "app.jar"
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
