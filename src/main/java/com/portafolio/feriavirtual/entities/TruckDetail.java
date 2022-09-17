@@ -23,8 +23,9 @@ import lombok.Setter;
 public class TruckDetail {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "truckdetailid_generator")
-    @SequenceGenerator(name = "truckdetailid_generator", initialValue = 1, allocationSize = 1, sequenceName = "truckdetailid_seq")
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "truckdetailid_generator")
+//    @SequenceGenerator(name = "truckdetailid_generator", initialValue = 1, allocationSize = 1, sequenceName = "truckdetailid_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long idTruck;
     private Long idSale;

@@ -24,8 +24,9 @@ import lombok.Setter;
 public class Sale {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "saleid_generator")
-    @SequenceGenerator(name = "saleid_generator", initialValue = 1, allocationSize = 1, sequenceName = "saleid_seq")
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "saleid_generator")
+//    @SequenceGenerator(name = "saleid_generator", initialValue = 1, allocationSize = 1, sequenceName = "saleid_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "id_contract")
     private Long idContract;

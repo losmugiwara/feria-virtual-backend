@@ -9,8 +9,9 @@ import com.portafolio.feriavirtual.security.enums.RoleList;
 @Table(name = "roles")
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roleid_generator")
-    @SequenceGenerator(name = "roleid_generator", initialValue = 1, allocationSize = 1, sequenceName = "roleid_seq")
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "roleid_generator")
+//    @SequenceGenerator(name = "roleid_generator", initialValue = 1, allocationSize = 1, sequenceName = "roleid_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     @Enumerated(EnumType.STRING)

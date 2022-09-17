@@ -8,12 +8,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="feria-virtual" />
         <module name="security" />
+        <module name="feria-virtual-backend" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="feria-virtual" options="-parameters" />
+      <module name="feria-virtual-backend" options="-parameters" />
       <module name="security" options="-parameters" />
     </option>
   </component>

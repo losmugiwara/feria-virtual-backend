@@ -22,8 +22,9 @@ import lombok.Setter;
 public class Truck {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "truckid_generator")
-    @SequenceGenerator(name = "truckid_generator", initialValue = 1, allocationSize = 1, sequenceName = "truckid_seq")
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "truckid_generator")
+//    @SequenceGenerator(name = "truckid_generator", initialValue = 1, allocationSize = 1, sequenceName = "truckid_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "plate")
