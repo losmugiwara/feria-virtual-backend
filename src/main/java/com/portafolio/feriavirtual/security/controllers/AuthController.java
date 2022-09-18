@@ -115,4 +115,10 @@ public class AuthController {
         return new ResponseEntity<>(new Message("Usuario creado con exito!"), HttpStatus.CREATED);
     }
 
+
+    @GetMapping("/profile/{userName}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String userName){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.getByUserName(userName));
+    } 
+
 }
