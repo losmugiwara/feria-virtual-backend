@@ -67,8 +67,13 @@ public class AuthController {
 
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
-        User user = new User(newUser.getUserName(), newUser.getEmail(),
-                passwordEncoder.encode(newUser.getPassword()));
+            
+        User user = new User();
+        user.setUserName(newUser.getUserName());
+        user.setEmail(newUser.getEmail());
+        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        user.setName(newUser.getName());
+        user.setLastName(newUser.getLastName());
         Set<Role> roles = new HashSet<>();
         if (newUser.getRoles().contains("ROLE_CUSTOMER_EXTERNAL"))
             roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
@@ -99,9 +104,15 @@ public class AuthController {
 
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
-        User user = new User(newUser.getUserName(), newUser.getEmail(),
-                passwordEncoder.encode(newUser.getPassword()));
-        Set<Role> roles = new HashSet<>();
+        
+            User user = new User();
+            user.setUserName(newUser.getUserName());
+            user.setEmail(newUser.getEmail());
+            user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+            user.setName(newUser.getName());
+            user.setLastName(newUser.getLastName());
+        
+                Set<Role> roles = new HashSet<>();
         if (newUser.getRoles().contains("ROLE_CUSTOMER_EXTERNAL"))
             roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
         if (newUser.getRoles().contains("ROLE_CUSTOMER_INTERNAL"))
@@ -114,5 +125,11 @@ public class AuthController {
         userService.save(user);
         return new ResponseEntity<>(new Message("Usuario creado con exito!"), HttpStatus.CREATED);
     }
+
+
+    @GetMapping("/profile/{userName}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String userName){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.getByUserName(userName));
+    } 
 
 }

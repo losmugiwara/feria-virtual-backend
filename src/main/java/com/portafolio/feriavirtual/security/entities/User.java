@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+
 public class User {
 
 
@@ -35,10 +35,10 @@ public class User {
     @Column(unique = true)
     private String userName;
     @Column(name = "name")
-    @Null
+    @NotNull
     private String name;
     @Column(name = "last_name")
-    @Null
+    @NotNull
     private String lastName;
     @NotNull
     @Email
@@ -88,4 +88,15 @@ public class User {
     @Null
     @Column(name = "birth_date")
     private Date birthDate;
+    
+
+    public User() {
+    }
+
+    public User(@NotNull String userName, @NotNull String email, @NotNull String password) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+    }
+
 }

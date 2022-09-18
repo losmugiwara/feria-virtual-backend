@@ -12,20 +12,25 @@ public class MainUser implements UserDetails {
     private String userName;
     private String email;
     private String password;
+    private String name;
+    private String lastName;
     private Collection<? extends GrantedAuthority> authorities;
 
 
     public MainUser(String userName, String email, String password,
+            String name, String lastName,
             Collection<? extends GrantedAuthority> authorities) {
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.name = name;
+        this.lastName = lastName;
         this.authorities = authorities;
     }
 
     public static MainUser build(User user){
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role-> new SimpleGrantedAuthority(role.getRoleName().name())).collect(Collectors.toList());
-        return new MainUser(user.getUserName(), user.getEmail(), user.getPassword(), authorities);
+        return new MainUser(user.getUserName(), user.getEmail(), user.getPassword(), user.getName(), user.getLastName(), authorities);
     }
     
     @Override
@@ -66,6 +71,14 @@ public class MainUser implements UserDetails {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
     
 }
