@@ -14,17 +14,35 @@
     "userName": "admin",
     "email": "admin@admin.com",
     "password": "admin",
+    "name": "admin",
+    "lastName": "admin",
     "roles": ["admin"]
 }
 </pre>
 
-<h5><strong>Usuario por defecto:</strong></h5>
+<h5><strong>Cliente externo:</strong></h5>
 
 <pre>
 {
     "userName": "john",
     "email": "john@doe.com",
-    "password": "johndoe"
+    "password": "johndoe",
+    "name": "john",
+    "lastName": "Doe",
+    "roles": ["ROLE_CUSTOMER_EXTERNAL"]
+}
+</pre>
+
+<h5><strong>Cliente interno:</strong></h5>
+
+<pre>
+{
+    "userName": "john",
+    "email": "john@doe.com",
+    "password": "johndoe",
+    "name": "john",
+    "lastName": "Doe",
+    "roles": ["ROLE_CUSTOMER_INTERNAL"]
 }
 </pre>
 
