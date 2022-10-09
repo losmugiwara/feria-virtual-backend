@@ -121,6 +121,8 @@ public class AuthController {
             roles.add(roleService.getByRoleName(RoleList.ROLE_CONSULTANT).get());
         if (newUser.getRoles().contains("ROLE_CARRIER"))
             roles.add(roleService.getByRoleName(RoleList.ROLE_CARRIER).get());
+        if (newUser.getRoles().contains("ROLE_PRODUCER"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_PRODUCER).get());
         user.setRoles(roles);
         userService.save(user);
         return new ResponseEntity<>(new Message("Usuario creado con exito!"), HttpStatus.CREATED);

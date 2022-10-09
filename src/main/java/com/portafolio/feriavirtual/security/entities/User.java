@@ -75,16 +75,6 @@ public class User {
     @Null
     @Column(name = "address")
     private String address;
-
-
-    @Null
-    @Column(name = "date_startcontract")
-    private Date dateStartContract;
-    
-    @Null
-    @Column(name = "date_endcontract")
-    private Date dateEndContract;
-    
     @Null
     @Column(name = "birth_date")
     private Date birthDate;

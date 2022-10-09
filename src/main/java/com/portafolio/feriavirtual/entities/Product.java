@@ -1,5 +1,6 @@
 package com.portafolio.feriavirtual.entities;
 
+import com.portafolio.feriavirtual.security.entities.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,9 +12,9 @@ import javax.persistence.*;
 @Getter
 public class Product {
 
+    //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prodid_generator")
+    //    @SequenceGenerator(name = "prodid_sequence", initialValue = 1, allocationSize = 1, sequenceName = "prodid_seq")
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prodid_generator")
-//    @SequenceGenerator(name = "prodid_sequence", initialValue = 1, allocationSize = 1, sequenceName = "prodid_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -23,11 +24,24 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @Column(nullable = false)
+    private Double price;
 
     @Column(name = "producto_state")
     private Integer productState;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "quality_id")
+    private Quality quality;
+
+
 
 }
+
+
