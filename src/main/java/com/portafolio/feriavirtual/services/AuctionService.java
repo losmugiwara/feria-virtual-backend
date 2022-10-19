@@ -13,8 +13,8 @@ import com.portafolio.feriavirtual.security.respositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Service
 public class AuctionService implements AuctionDao {
@@ -94,6 +94,13 @@ public class AuctionService implements AuctionDao {
         List<CarrierOffer> carrierOffers = auction.getCarrierOffers();
 
         if (carrierOffers.size() == 5){
+
+
+            CarrierOffer co = carrierOffers.stream().min(Comparator.comparingDouble(CarrierOffer::getOffer))
+                    .orElseThrow(NoSuchElementException::new);
+
+            System.out.println(co.getOffer());
+
             return null;
         }
 
