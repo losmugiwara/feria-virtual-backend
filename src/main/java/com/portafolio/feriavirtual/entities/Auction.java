@@ -3,11 +3,7 @@ package com.portafolio.feriavirtual.entities;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
@@ -23,13 +19,16 @@ import lombok.Setter;
 @Entity
 @Table(name = "auctions")
 public class Auction {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
     @NotNull
     private RequestSale requestSale;
 
-    @ManyToOne
+    @ManyToMany
     @Null
     private List<CarrierOffer> carrierOffers;
 

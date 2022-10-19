@@ -7,8 +7,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class CarrierOfferDto {
+@AllArgsConstructor
+public class AuctionDto {
+
     private Double offer;
+
 }
