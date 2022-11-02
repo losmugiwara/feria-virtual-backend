@@ -6,6 +6,5 @@ public enum RoleList {
     ROLE_CUSTOMER_INTERNAL,
     ROLE_CONSULTANT,
     ROLE_CARRIER,
-
     ROLE_PRODUCER
 }

@@ -3,6 +3,11 @@ package com.portafolio.feriavirtual.entities;
 import com.portafolio.feriavirtual.entities.enums.SaleStatusEnum;
 import com.portafolio.feriavirtual.security.entities.User;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,13 +16,14 @@ import java.util.Date;
 
 @Entity
 @Table(name = "sales")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "observation", length = 150)
-    private String observation;
 
     @JoinColumn(name = "request_sale_id")
     @OneToOne
@@ -44,8 +50,6 @@ public class Sale {
     private SaleStatusEnum saleStatusEnum = SaleStatusEnum.WAREHOUSE;
 
     @Column(name = "creation_date")
-    @NotNull
-    @NotBlank
     private Date creationDate = new Date();
 
     @Column(name = "ending_date")

@@ -4,16 +4,18 @@ import com.portafolio.feriavirtual.dao.AuctionDao;
 import com.portafolio.feriavirtual.dto.AuctionDto;
 import com.portafolio.feriavirtual.entities.Auction;
 import com.portafolio.feriavirtual.entities.CarrierOffer;
+import com.portafolio.feriavirtual.entities.Product;
 import com.portafolio.feriavirtual.entities.RequestSale;
+import com.portafolio.feriavirtual.entities.Sale;
 import com.portafolio.feriavirtual.repositories.AuctionRepository;
 import com.portafolio.feriavirtual.repositories.CarrierOfferRepository;
 import com.portafolio.feriavirtual.repositories.RequestSaleRepository;
+import com.portafolio.feriavirtual.repositories.SaleRepository;
 import com.portafolio.feriavirtual.security.entities.User;
 import com.portafolio.feriavirtual.security.respositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 @Service
@@ -30,6 +32,9 @@ public class AuctionService implements AuctionDao {
 
     @Autowired
     private CarrierOfferRepository carrierOfferRepository;
+
+    @Autowired
+    private SaleRepository saleRepository;
 
     @Override
     public List<Auction> getAuctions() {
@@ -99,7 +104,30 @@ public class AuctionService implements AuctionDao {
             CarrierOffer co = carrierOffers.stream().min(Comparator.comparingDouble(CarrierOffer::getOffer))
                     .orElseThrow(NoSuchElementException::new);
 
-            System.out.println(co.getOffer());
+            Sale sale = new Sale();
+            
+            sale.setRequestSale(auction.getRequestSale());
+
+            Product product = auction.getRequestSale()
+                .getProducts().get(0);
+
+            User customer = product.getUser();
+            
+
+            sale.setCustomer(customer);
+            sale.setCarrier(co.getUser());
+            
+            Double totalProducts = auction.getRequestSale().getProducts().stream()
+                .mapToDouble(p -> p.getPrice())
+                .sum();
+            
+            sale.setTotalPriceProducts(totalProducts);
+            sale.setTotalCarrier(co.getOffer());
+            sale.setTotal(sale.getTotalCarrier() + sale.getTotalPriceProducts());
+            
+            saleRepository.save(sale);
+            
+
 
             return null;
         }
