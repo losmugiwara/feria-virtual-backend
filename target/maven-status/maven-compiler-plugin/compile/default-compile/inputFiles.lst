@@ -23,6 +23,7 @@ C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\port
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\services\ProductService.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\dao\QualityDao.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\controllers\AuthController.java
+C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\controllers\SaleController.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\entities\Product.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\dtos\JwtDto.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\dao\RequestSaleDao.java
@@ -33,6 +34,7 @@ C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\port
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\MainSecurity.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\services\RequestSaleService.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\repositories\QualityRepository.java
+C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\entities\Contract.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\controllers\UserController.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\repositories\RequestSaleRepository.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\services\RoleService.java
@@ -50,6 +52,7 @@ C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\port
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\controllers\RequestSaleController.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\services\UserService.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\dtos\NewUser.java
+C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\services\SaleService.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\repositories\CategoryRepository.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\controllers\AuctionController.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\dao\AuctionDao.java

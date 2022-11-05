@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.portafolio.feriavirtual.dao.SaleDao;
 import com.portafolio.feriavirtual.dto.SaleDto;
@@ -11,6 +12,7 @@ import com.portafolio.feriavirtual.entities.Sale;
 import com.portafolio.feriavirtual.entities.enums.SaleStatusEnum;
 import com.portafolio.feriavirtual.repositories.SaleRepository;
 
+@Service
 public class SaleService implements SaleDao{
 
     @Autowired
