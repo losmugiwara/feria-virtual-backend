@@ -21,9 +21,5 @@ public class SaleController {
         return ResponseEntity.status(HttpStatus.OK).body(saleDao.getSales());
     }
 
-    // @GetMapping("/{idCustomer}")
-    // public ResponseEntity
-
-
 
 }

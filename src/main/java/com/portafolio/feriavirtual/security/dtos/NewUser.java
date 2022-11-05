@@ -28,6 +28,20 @@ public class NewUser {
     @NotBlank
     private String lastName;
     private Set<String> roles = new HashSet<>();
+    @NotBlank
+    private String rut;
+    @NotBlank
+    private String businessName;
+    @NotBlank
+    private String country;
+    @NotBlank
+    private String city;
+    @NotBlank
+    private String commune;
+    @NotBlank
+    private String address;
+    
+
 
 
 

@@ -111,6 +111,12 @@ public class AuthController {
             user.setPassword(passwordEncoder.encode(newUser.getPassword()));
             user.setName(newUser.getName());
             user.setLastName(newUser.getLastName());
+            user.setRut(newUser.getRut());
+            user.setBusinessName(newUser.getBusinessName());
+            user.setCountry(newUser.getCountry());
+            user.setCity(newUser.getCity());
+            user.setCommune(newUser.getCommune());
+            user.setAddress(newUser.getAddress());
         
                 Set<Role> roles = new HashSet<>();
         if (newUser.getRoles().contains("ROLE_CUSTOMER_EXTERNAL"))
