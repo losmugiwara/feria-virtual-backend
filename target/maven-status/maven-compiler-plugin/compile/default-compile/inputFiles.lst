@@ -38,6 +38,7 @@ C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\port
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\controllers\UserController.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\repositories\RequestSaleRepository.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\services\RoleService.java
+C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\entities\email\EmailDetail.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\dao\ProductDao.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\jwt\JwtEntryPoint.java
 C:\Users\franc\Documents\portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\controllers\QualityController.java

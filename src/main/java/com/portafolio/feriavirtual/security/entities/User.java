@@ -52,27 +52,22 @@ public class User {
      inverseJoinColumns=@JoinColumn(name="role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @Null
     @Column(name = "rut", length = 15)
     private String rut;
 
-    @Null
     @Column(name = "business_name")
     private String businessName;
 
-    @Null
     @Column(name = "country")
     private String country;
 
-    @Null
     @Column(name = "city")
     private String city;
 
-    @Null
     @Column(name = "commune")
     private String commune;
 
-    @Null
+
     @Column(name = "address")
     private String address;
     @Null

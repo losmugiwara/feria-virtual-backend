@@ -13,5 +13,5 @@ public interface SaleDao {
     Optional<Sale> getSaleById(Long saleId);
     Sale saveSale(SaleDto saleDto, Long requestSaleId, Long carrierId);
     Optional<Sale> updateSaleById(Long saleId, SaleDto saleDto);
-    Sale updateShippingStatusById(Long saleId, SaleStatusEnum shippingStatus);
+    Sale updateShippingStatusById(Long saleId, String shippingStatus);
 }

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.portafolio.feriavirtual.dao.SaleDao;
@@ -17,6 +20,12 @@ public class SaleService implements SaleDao{
 
     @Autowired
     private SaleRepository saleRepository;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+    
+    @Value("${spring.mail.username}")
+    private String sender;
 
 
     @Override
@@ -55,19 +64,41 @@ public class SaleService implements SaleDao{
     }
 
     @Override
-    public Sale updateShippingStatusById(Long saleId, SaleStatusEnum shippingStatus) {
+    public Sale updateShippingStatusById(Long saleId, String shippingStatus) {
         
-        Optional<Sale> saleOptional = saleRepository.findById(saleId);
+        try {
+            Optional<Sale> saleOptional = saleRepository.findById(saleId);
+    
+            if(!saleOptional.isPresent()){
+                return null;
+            }
+    
+            Sale sale = saleOptional.get();
 
-        if(!saleOptional.isPresent()){
+            SaleStatusEnum vv = SaleStatusEnum.valueOf(shippingStatus);
+
+            
+    
+            sale.setSaleStatusEnum(vv);
+            System.out.println(vv);
+    
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            
+            mailMessage.setFrom("franciscouribematus@gmail.com");
+            mailMessage.setTo("fr.uribem@duocuc.cl");
+            mailMessage.setText("Hola que tal?");
+            mailMessage.setSubject("Test Email From Spring Boot");
+
+            javaMailSender.send(mailMessage);
+
+
+
+            return saleRepository.save(sale);
+            
+        } catch (Exception e) {
             return null;
         }
-
-        Sale sale = saleOptional.get();
-
-        sale.setSaleStatusEnum(shippingStatus);
-
-        return saleRepository.save(sale);
+        
     }
     
 }

@@ -65,27 +65,60 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<Object> resgister(@Valid @RequestBody NewUser newUser, BindingResult bindingResult) {
 
+
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
-            
-        User user = new User();
-        user.setUserName(newUser.getUserName());
-        user.setEmail(newUser.getEmail());
-        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
-        user.setName(newUser.getName());
-        user.setLastName(newUser.getLastName());
-        Set<Role> roles = new HashSet<>();
+        
+            User user = new User();
+            user.setUserName(newUser.getUserName());
+            user.setEmail(newUser.getEmail());
+            user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+            user.setName(newUser.getName());
+            user.setLastName(newUser.getLastName());
+            user.setRut(newUser.getRut());
+            user.setBusinessName(newUser.getBusinessName());
+            user.setCountry(newUser.getCountry());
+            user.setCity(newUser.getCity());
+            user.setCommune(newUser.getCommune());
+            user.setAddress(newUser.getAddress());
+        
+                Set<Role> roles = new HashSet<>();
         if (newUser.getRoles().contains("ROLE_CUSTOMER_EXTERNAL"))
             roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
-        if (newUser.getRoles().contains("ROLE_ADMIN"))
-            roles.add(roleService.getByRoleName(RoleList.ROLE_ADMIN).get());
+        if (newUser.getRoles().contains("ROLE_CUSTOMER_INTERNAL"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_INTERNAL).get());
+        if (newUser.getRoles().contains("ROLE_CONSULTANT"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_CONSULTANT).get());
+        if (newUser.getRoles().contains("ROLE_CARRIER"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_CARRIER).get());
+        if (newUser.getRoles().contains("ROLE_PRODUCER"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_PRODUCER).get());
         user.setRoles(roles);
+        userService.save(user);
+        return new ResponseEntity<>(new Message("Usuario creado con exito!"), HttpStatus.CREATED);
 
 
-        if(userService.save(user)){
-            return new ResponseEntity<>(new Message("Registro exitoso! Inicie sesión"), HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(new Message("Credenciales en uso, intenta con otro usuario o email"), HttpStatus.OK);
+        // if (bindingResult.hasErrors())
+        //     return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
+            
+        // User user = new User();
+        // user.setUserName(newUser.getUserName());
+        // user.setEmail(newUser.getEmail());
+        // user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        // user.setName(newUser.getName());
+        // user.setLastName(newUser.getLastName());
+        // Set<Role> roles = new HashSet<>();
+        // if (newUser.getRoles().contains("ROLE_CUSTOMER_EXTERNAL"))
+        //     roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
+        // if (newUser.getRoles().contains("ROLE_ADMIN"))
+        //     roles.add(roleService.getByRoleName(RoleList.ROLE_ADMIN).get());
+        // user.setRoles(roles);
+
+
+        // if(userService.save(user)){
+        //     return new ResponseEntity<>(new Message("Registro exitoso! Inicie sesión"), HttpStatus.CREATED);
+        // }
+        // return new ResponseEntity<>(new Message("Credenciales en uso, intenta con otro usuario o email"), HttpStatus.OK);
         
         
         
@@ -98,7 +131,7 @@ public class AuthController {
         return userService.getAllUsers();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/register/account")
     public ResponseEntity<Object> resgisterAccount(@Valid @RequestBody NewUser newUser, BindingResult bindingResult) {
 
