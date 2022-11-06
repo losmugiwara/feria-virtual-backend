@@ -67,6 +67,10 @@ public class SaleService implements SaleDao{
     public Sale updateShippingStatusById(Long saleId, String shippingStatus) {
         
         try {
+
+
+            System.out.println("shippingStatus ========> " + shippingStatus );
+
             Optional<Sale> saleOptional = saleRepository.findById(saleId);
     
             if(!saleOptional.isPresent()){
@@ -75,17 +79,11 @@ public class SaleService implements SaleDao{
     
             Sale sale = saleOptional.get();
 
-            SaleStatusEnum vv = SaleStatusEnum.valueOf(shippingStatus);
-
-            
-    
-            sale.setSaleStatusEnum(vv);
-            System.out.println(vv);
     
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             
-            mailMessage.setFrom("franciscouribematus@gmail.com");
-            mailMessage.setTo("fr.uribem@duocuc.cl");
+            mailMessage.setFrom(sender);
+            mailMessage.setTo(sender);
             mailMessage.setText("Hola que tal?");
             mailMessage.setSubject("Test Email From Spring Boot");
 

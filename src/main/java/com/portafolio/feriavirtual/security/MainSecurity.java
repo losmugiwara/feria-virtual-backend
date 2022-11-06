@@ -35,7 +35,7 @@ public class MainSecurity {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.cors().and().csrf().disable()
         .authorizeRequests()
-        .antMatchers("/auth/**")
+        .antMatchers("/auth/**", "/api/products/**")
         .permitAll()
         .anyRequest().authenticated()
         .and()

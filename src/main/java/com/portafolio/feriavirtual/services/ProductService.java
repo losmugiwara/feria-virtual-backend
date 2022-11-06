@@ -88,6 +88,7 @@ public class ProductService implements ProductDao {
         product.setNameProduct(productDto.getNameProduct());
         product.setStock(productDto.getStock());
         product.setPrice(productDto.getPrice());
+        product.setUrlImage(productDto.getUrlImage());
 
         if(product.getPrice() <= 0){
             return null;

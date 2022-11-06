@@ -13,4 +13,5 @@ public class ProductDto {
     private String nameProduct;
     private Double price;
     private Integer stock;
+    private String urlImage;
 }
