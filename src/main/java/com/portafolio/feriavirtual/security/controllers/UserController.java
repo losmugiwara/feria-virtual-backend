@@ -15,6 +15,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping
+    public ResponseEntity<?> getUsers(){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.getAllUsers());
+
+    }
+
     @GetMapping("/{userName}")
     public ResponseEntity<?> getUserByUsername(@PathVariable String userName){
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.getByUserName(userName));

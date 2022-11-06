@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.portafolio.feriavirtual.dao.SaleDao;
-import com.portafolio.feriavirtual.entities.enums.SaleStatusEnum;
 
 @RestController
 @RequestMapping("/api/sales")
