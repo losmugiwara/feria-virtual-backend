@@ -3,8 +3,6 @@ package com.portafolio.feriavirtual.services;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EnumType;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
