@@ -30,6 +30,10 @@ public class Sale {
     @ManyToOne
     @JoinColumn(name = "user_customer_id")
     private User customer;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_producer_id")
+    private User producer;
 
     @ManyToOne
     @JoinColumn(name = "user_carrier_id")

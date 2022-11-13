@@ -81,6 +81,7 @@ public class AuctionService implements AuctionDao {
     @Override
     public Auction updateAuctionById(Long auctionId, Long userId, AuctionDto auctionDto) {
 
+        //transportista
         Optional<User> userOptional = userRepository.findById(userId);
         Optional<Auction> auctionOptional = auctionRepository.findById(auctionId);
 
@@ -114,12 +115,13 @@ public class AuctionService implements AuctionDao {
             
             sale.setRequestSale(auction.getRequestSale());
 
+            //obteniendo PRODUCER desde product
             Product product = auction.getRequestSale()
                 .getProducts().get(0);
 
-            User customer = product.getUser();
-            
-
+            User producer = product.getUser();            
+            User customer = auction.getRequestSale().getUser();
+            sale.setProducer(producer);
             sale.setCustomer(customer);
             sale.setCarrier(co.getUser());
             

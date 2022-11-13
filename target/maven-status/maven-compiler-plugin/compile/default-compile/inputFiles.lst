@@ -20,7 +20,9 @@ C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\port
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\entities\enums\ApprovalStatusEnum.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\entities\enums\SaleStatusEnum.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\entities\Auction.java
+C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\controllers\ContractController.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\entities\Message.java
+C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\services\ContractService.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\services\ProductService.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\dao\QualityDao.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\controllers\AuthController.java
@@ -48,6 +50,7 @@ C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\port
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\security\jwt\JwtTokenFilter.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\entities\enums\ContractValidity.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\dto\ProductDto.java
+C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\dao\ContractDao.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\dto\AuctionDto.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\SecuritySApplication.java
 C:\Users\franc\Documents\Portafolio\feria-virtual-backend\src\main\java\com\portafolio\feriavirtual\repositories\AuctionRepository.java

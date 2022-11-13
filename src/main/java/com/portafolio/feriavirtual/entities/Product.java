@@ -12,9 +12,6 @@ import javax.validation.constraints.Null;
 @Setter
 @Getter
 public class Product {
-
-    //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prodid_generator")
-    //    @SequenceGenerator(name = "prodid_sequence", initialValue = 1, allocationSize = 1, sequenceName = "prodid_seq")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
