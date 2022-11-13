@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.portafolio.feriavirtual.dao.SaleDao;
+import com.portafolio.feriavirtual.entities.enums.SaleStatusEnum;
 
 @RestController
 @RequestMapping("/api/sales")
@@ -25,8 +26,8 @@ public class SaleController {
     }
 
     @PutMapping("/sale={saleId}")
-    public ResponseEntity<?> updateShippingStatusById(@PathVariable Long saleId, @RequestBody String shippingStatus){
-        return ResponseEntity.status(HttpStatus.OK).body(saleDao.updateShippingStatusById(saleId, shippingStatus));
+    public ResponseEntity<?> updateShippingStatusById(@PathVariable Long saleId, @RequestBody SaleStatusEnum saleStatusEnum){
+        return ResponseEntity.status(HttpStatus.OK).body(saleDao.updateShippingStatusById(saleId, saleStatusEnum));
     }
 
 

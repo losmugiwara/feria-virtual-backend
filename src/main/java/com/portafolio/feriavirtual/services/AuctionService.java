@@ -4,11 +4,13 @@ import com.portafolio.feriavirtual.dao.AuctionDao;
 import com.portafolio.feriavirtual.dto.AuctionDto;
 import com.portafolio.feriavirtual.entities.Auction;
 import com.portafolio.feriavirtual.entities.CarrierOffer;
+import com.portafolio.feriavirtual.entities.Contract;
 import com.portafolio.feriavirtual.entities.Product;
 import com.portafolio.feriavirtual.entities.RequestSale;
 import com.portafolio.feriavirtual.entities.Sale;
 import com.portafolio.feriavirtual.repositories.AuctionRepository;
 import com.portafolio.feriavirtual.repositories.CarrierOfferRepository;
+import com.portafolio.feriavirtual.repositories.ContractRepository;
 import com.portafolio.feriavirtual.repositories.RequestSaleRepository;
 import com.portafolio.feriavirtual.repositories.SaleRepository;
 import com.portafolio.feriavirtual.security.entities.User;
@@ -35,6 +37,10 @@ public class AuctionService implements AuctionDao {
 
     @Autowired
     private SaleRepository saleRepository;
+
+    @Autowired
+    private ContractRepository contractRepository;
+
 
     @Override
     public List<Auction> getAuctions() {
@@ -127,8 +133,12 @@ public class AuctionService implements AuctionDao {
             
             saleRepository.save(sale);
             
+            //Instancia para contract y relacionarlo con sale
+            Contract contract = new Contract();
+            contract.setSale(sale);
 
-
+            contractRepository.save(contract);
+            
             return null;
         }
 

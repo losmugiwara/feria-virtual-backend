@@ -64,12 +64,12 @@ public class SaleService implements SaleDao{
     }
 
     @Override
-    public Sale updateShippingStatusById(Long saleId, String shippingStatus) {
+    public Sale updateShippingStatusById(Long saleId, SaleStatusEnum saleStatusEnum) {
         
         try {
 
 
-            System.out.println("shippingStatus ========> " + shippingStatus );
+            System.out.println("shippingStatus ========> " + saleStatusEnum );
 
             Optional<Sale> saleOptional = saleRepository.findById(saleId);
     
@@ -80,14 +80,14 @@ public class SaleService implements SaleDao{
             Sale sale = saleOptional.get();
 
     
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            // SimpleMailMessage mailMessage = new SimpleMailMessage();
             
-            mailMessage.setFrom(sender);
-            mailMessage.setTo(sender);
-            mailMessage.setText("Hola que tal?");
-            mailMessage.setSubject("Test Email From Spring Boot");
+            // mailMessage.setFrom(sender);
+            // mailMessage.setTo(sender);
+            // mailMessage.setText("Hola que tal?");
+            // mailMessage.setSubject("Test Email From Spring Boot");
 
-            javaMailSender.send(mailMessage);
+            // javaMailSender.send(mailMessage);
 
 
 

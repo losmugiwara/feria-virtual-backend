@@ -30,7 +30,6 @@ public class NewUser {
     private Set<String> roles = new HashSet<>();
     @NotBlank
     private String rut;
-    @NotBlank
     private String businessName;
     @NotBlank
     private String country;

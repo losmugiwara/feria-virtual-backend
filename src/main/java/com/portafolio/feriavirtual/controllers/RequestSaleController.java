@@ -28,11 +28,11 @@ public class RequestSaleController {
         return ResponseEntity.status(HttpStatus.OK).body(requestSaleDao.getRequestSale(requestSaleId));
     }
 
-    @PostMapping("/{requestSaleId}")
-    public ResponseEntity<?> saveRequestSale(@Valid @RequestBody RequestSaleDto requestSaleDto, @PathVariable Long requestSaleId, BindingResult bindingResult){
+    @PostMapping("/{customerId}")
+    public ResponseEntity<?> saveRequestSale(@Valid @RequestBody RequestSaleDto requestSaleDto, @PathVariable Long customerId, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Los campos ingresados son incorrectos"), HttpStatus.BAD_REQUEST);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(requestSaleDao.saveRequestSale(requestSaleDto, requestSaleId));
+        return ResponseEntity.status(HttpStatus.CREATED).body(requestSaleDao.saveRequestSale(requestSaleDto, customerId));
     }
 }
