@@ -25,8 +25,8 @@ public class SaleController {
         return ResponseEntity.status(HttpStatus.OK).body(saleDao.getSales());
     }
 
-    @PutMapping("/sale={saleId}")
-    public ResponseEntity<?> updateShippingStatusById(@PathVariable Long saleId, @RequestBody SaleStatusEnum saleStatusEnum){
+    @PutMapping("/sale={saleId}/status={saleStatusEnum}")
+    public ResponseEntity<?> updateShippingStatusById(@PathVariable Long saleId, @PathVariable Integer saleStatusEnum){
         return ResponseEntity.status(HttpStatus.OK).body(saleDao.updateShippingStatusById(saleId, saleStatusEnum));
     }
 

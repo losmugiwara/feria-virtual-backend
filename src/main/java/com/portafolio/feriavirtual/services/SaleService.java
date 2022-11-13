@@ -3,6 +3,8 @@ package com.portafolio.feriavirtual.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EnumType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -64,12 +66,9 @@ public class SaleService implements SaleDao{
     }
 
     @Override
-    public Sale updateShippingStatusById(Long saleId, SaleStatusEnum saleStatusEnum) {
+    public Sale updateShippingStatusById(Long saleId, Integer saleStatusEnum) {
         
         try {
-
-
-            System.out.println("shippingStatus ========> " + saleStatusEnum );
 
             Optional<Sale> saleOptional = saleRepository.findById(saleId);
     
@@ -79,17 +78,33 @@ public class SaleService implements SaleDao{
     
             Sale sale = saleOptional.get();
 
-    
-            // SimpleMailMessage mailMessage = new SimpleMailMessage();
+            if (saleStatusEnum == 1){
+                sale.setSaleStatusEnum(SaleStatusEnum.PACKAGE);
+            }
+            if (saleStatusEnum == 2){
+                sale.setSaleStatusEnum(SaleStatusEnum.DISPATCH_PORT);
+            }
+            if (saleStatusEnum == 3){
+                sale.setSaleStatusEnum(SaleStatusEnum.IN_TRANSIT);
+            }
+            if (saleStatusEnum == 4){
+                sale.setSaleStatusEnum(SaleStatusEnum.CUSTOMER_REVISION);
+            }
+            if (saleStatusEnum == 5){
+                sale.setSaleStatusEnum(SaleStatusEnum.ACCEPTED);
+            }
+            if (saleStatusEnum == 6){
+                sale.setSaleStatusEnum(SaleStatusEnum.REJECTED);
+            }
+
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
             
-            // mailMessage.setFrom(sender);
-            // mailMessage.setTo(sender);
-            // mailMessage.setText("Hola que tal?");
-            // mailMessage.setSubject("Test Email From Spring Boot");
+            mailMessage.setFrom(sender);
+            mailMessage.setTo(sale.getRequestSale().getUser().getEmail());
+            mailMessage.setText("Estado acual del pedido: " + sale.getSaleStatusEnum());
+            mailMessage.setSubject("Estado de Venta");
 
-            // javaMailSender.send(mailMessage);
-
-
+            javaMailSender.send(mailMessage);
 
             return saleRepository.save(sale);
             
