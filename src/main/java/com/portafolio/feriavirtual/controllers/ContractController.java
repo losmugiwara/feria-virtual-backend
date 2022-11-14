@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +24,12 @@ public class ContractController {
     public ResponseEntity<?> getContracts(){
         return ResponseEntity.status(HttpStatus.OK).body(contractDao.getContracts());
     }
+
+    @GetMapping("/{idContract}")
+    public ResponseEntity<?> getContractById(@PathVariable Long idContract){
+        return ResponseEntity.status(HttpStatus.OK).body(contractDao.getContractById(idContract));
+
+    }
+
 
 }
