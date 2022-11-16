@@ -3,12 +3,14 @@ package com.portafolio.feriavirtual.services;
 import com.portafolio.feriavirtual.dao.RequestSaleDao;
 import com.portafolio.feriavirtual.dto.RequestSaleDto;
 import com.portafolio.feriavirtual.entities.RequestSale;
+import com.portafolio.feriavirtual.entities.enums.ApprovalStatusEnum;
 import com.portafolio.feriavirtual.repositories.RequestSaleRepository;
 import com.portafolio.feriavirtual.security.entities.User;
 import com.portafolio.feriavirtual.security.respositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +56,29 @@ public class RequestSaleService implements RequestSaleDao {
         rs.setUser(user);
         rs.setProducts(requestSaleDto.getProducts());
         rs.setShippingAddress(requestSaleDto.getShippingAddress());
+
+        return requestSaleRepository.save(rs);
+    }
+
+    @Override
+    public RequestSale updateStatusRequestSaleById(Long requestSaleId, Integer approvalStatus) {
+        Optional<RequestSale> rsOptional = requestSaleRepository.findById(requestSaleId);
+
+        if(!rsOptional.isPresent()){
+            return null;
+        }
+
+        RequestSale rs = rsOptional.get();
+
+        if(approvalStatus == 1){
+            rs.setApprovalStatus(ApprovalStatusEnum.PASSED);
+        }
+
+        if(approvalStatus == 2){
+            rs.setApprovalStatus(ApprovalStatusEnum.REFUSED);
+        }
+
+        rs.setApprovalDate(new Date());
 
         return requestSaleRepository.save(rs);
     }

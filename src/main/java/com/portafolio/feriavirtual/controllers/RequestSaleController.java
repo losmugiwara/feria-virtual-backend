@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/request-sale")
+@RequestMapping("/api/requests-sale")
+@CrossOrigin("*")
 public class RequestSaleController {
 
     @Autowired
@@ -34,5 +35,10 @@ public class RequestSaleController {
             return new ResponseEntity<>(new Message("Los campos ingresados son incorrectos"), HttpStatus.BAD_REQUEST);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(requestSaleDao.saveRequestSale(requestSaleDto, customerId));
+    }
+
+    @PutMapping("/request={requestSaleId}/status={approvalStatus}")
+    public ResponseEntity<?> updateRequestSaleStatus(@PathVariable Long requestSaleId, @PathVariable Integer approvalStatus){
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(requestSaleDao.updateStatusRequestSaleById(requestSaleId, approvalStatus));
     }
 }
