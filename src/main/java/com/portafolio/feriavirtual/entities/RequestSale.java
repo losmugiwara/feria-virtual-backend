@@ -39,9 +39,9 @@ public class RequestSale {
     @Column(name = "created_date")
     private Date createdDate = new Date();
 
-    @Column(name = "approval_date")
-    @Null
-    private Date approvalDate;
+    // @Column(name = "approval_date")
+    // @Null
+    // private Date approvalDate;
 
 
     @Column(name = "approval_status")

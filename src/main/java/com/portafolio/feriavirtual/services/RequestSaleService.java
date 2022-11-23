@@ -61,7 +61,7 @@ public class RequestSaleService implements RequestSaleDao {
     }
 
     @Override
-    public RequestSale updateStatusRequestSaleById(Long requestSaleId, Integer approvalStatus) {
+    public RequestSale updateStatusRequestSaleById(Long requestSaleId, Long approvalStatus) {
         Optional<RequestSale> rsOptional = requestSaleRepository.findById(requestSaleId);
 
         if(!rsOptional.isPresent()){
@@ -78,7 +78,7 @@ public class RequestSaleService implements RequestSaleDao {
             rs.setApprovalStatus(ApprovalStatusEnum.REFUSED);
         }
 
-        rs.setApprovalDate(new Date());
+        // rs.setApprovalDate(new Date());
 
         return requestSaleRepository.save(rs);
     }

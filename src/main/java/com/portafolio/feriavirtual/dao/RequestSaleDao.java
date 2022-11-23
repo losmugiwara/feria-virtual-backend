@@ -10,5 +10,5 @@ public interface RequestSaleDao {
     List<RequestSale> getRequestsSale();
     Optional<RequestSale> getRequestSale(Long requestSaleId);
     RequestSale saveRequestSale(RequestSaleDto requestSaleDto, Long userId);
-    RequestSale updateStatusRequestSaleById(Long requestSaleId, Integer approvalStatus);
+    RequestSale updateStatusRequestSaleById(Long requestSaleId, Long approvalStatus);
 }

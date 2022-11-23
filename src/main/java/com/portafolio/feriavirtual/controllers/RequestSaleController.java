@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/requests-sale")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 public class RequestSaleController {
 
     @Autowired
@@ -38,7 +38,7 @@ public class RequestSaleController {
     }
 
     @PutMapping("/request={requestSaleId}/status={approvalStatus}")
-    public ResponseEntity<?> updateRequestSaleStatus(@PathVariable Long requestSaleId, @PathVariable Integer approvalStatus){
+    public ResponseEntity<?> updateRequestSaleStatus(@PathVariable Long requestSaleId, @PathVariable Long approvalStatus){
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(requestSaleDao.updateStatusRequestSaleById(requestSaleId, approvalStatus));
     }
 }
