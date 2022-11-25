@@ -157,6 +157,7 @@ public class AuctionService implements AuctionDao {
 
         Auction auction = aOptional.get();
         auction.setActive(active);
+        auction.setCarrierOffers(null);
 
         return auctionRepository.save(auction);
     }
