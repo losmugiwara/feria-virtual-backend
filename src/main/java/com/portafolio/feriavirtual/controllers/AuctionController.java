@@ -11,9 +11,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("/api/auctions")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST, RequestMethod.PUT})
 public class AuctionController {
 
     @Autowired
@@ -42,6 +47,10 @@ public class AuctionController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(auctionDao.updateAuctionById(auctionId, carrierId, auctionDto));
+    }
 
+    @PutMapping("/auction={auctionId}/active={active}")
+    public ResponseEntity<?> updateAuctionActiveById(@PathVariable Long auctionId, @PathVariable Integer active) {
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(auctionDao.updateActiveAuctionById(auctionId, active));
     }
 }

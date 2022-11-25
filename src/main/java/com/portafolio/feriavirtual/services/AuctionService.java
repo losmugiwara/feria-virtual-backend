@@ -41,7 +41,6 @@ public class AuctionService implements AuctionDao {
     @Autowired
     private ContractRepository contractRepository;
 
-
     @Override
     public List<Auction> getAuctions() {
         return (List<Auction>) auctionRepository.findAll();
@@ -50,10 +49,9 @@ public class AuctionService implements AuctionDao {
     @Override
     public Optional<Auction> getAuctionById(Long auctionId) {
 
-
         Optional<Auction> auctionOptional = auctionRepository.findById(auctionId);
 
-        if(!auctionOptional.isPresent()){
+        if (!auctionOptional.isPresent()) {
             return null;
         }
 
@@ -67,7 +65,7 @@ public class AuctionService implements AuctionDao {
 
         Optional<RequestSale> requestSaleOptional = requestSaleRepository.findById(requestSaleId);
 
-        if (!requestSaleOptional.isPresent()){
+        if (!requestSaleOptional.isPresent()) {
             return null;
         }
 
@@ -81,15 +79,15 @@ public class AuctionService implements AuctionDao {
     @Override
     public Auction updateAuctionById(Long auctionId, Long userId, AuctionDto auctionDto) {
 
-        //transportista
+        // transportista
         Optional<User> userOptional = userRepository.findById(userId);
         Optional<Auction> auctionOptional = auctionRepository.findById(auctionId);
 
-        if(!userOptional.isPresent()){
+        if (!userOptional.isPresent()) {
             return null;
         }
 
-        if(!auctionOptional.isPresent()){
+        if (!auctionOptional.isPresent()) {
             return null;
         }
 
@@ -105,47 +103,60 @@ public class AuctionService implements AuctionDao {
 
         List<CarrierOffer> carrierOffers = auction.getCarrierOffers();
 
-        if (carrierOffers.size() == 5){
-
+        if (carrierOffers.size() == 5) {
 
             CarrierOffer co = carrierOffers.stream().min(Comparator.comparingDouble(CarrierOffer::getOffer))
                     .orElseThrow(NoSuchElementException::new);
 
             Sale sale = new Sale();
-            
+
             sale.setRequestSale(auction.getRequestSale());
 
-            //obteniendo PRODUCER desde product
+            // obteniendo PRODUCER desde product
             Product product = auction.getRequestSale()
-                .getProducts().get(0);
+                    .getProducts().get(0);
 
-            User producer = product.getUser();            
+            User producer = product.getUser();
             User customer = auction.getRequestSale().getUser();
             sale.setProducer(producer);
             sale.setCustomer(customer);
             sale.setCarrier(co.getUser());
-            
+
             Double totalProducts = auction.getRequestSale().getProducts().stream()
-                .mapToDouble(p -> p.getPrice())
-                .sum();
-            
+                    .mapToDouble(p -> p.getPrice())
+                    .sum();
+
             sale.setTotalPriceProducts(totalProducts);
             sale.setTotalCarrier(co.getOffer());
             sale.setTotal(sale.getTotalCarrier() + sale.getTotalPriceProducts());
-            
+
             saleRepository.save(sale);
-            
-            //Instancia para contract y relacionarlo con sale
+
+            // Instancia para contract y relacionarlo con sale
             Contract contract = new Contract();
             contract.setSale(sale);
 
             contractRepository.save(contract);
-            
+
             return null;
         }
 
         carrierOffers.add(carrierOfferSave);
         auction.setCarrierOffers(carrierOffers);
+
+        return auctionRepository.save(auction);
+    }
+
+    @Override
+    public Auction updateActiveAuctionById(Long auctionId, Integer active) {
+        Optional<Auction> aOptional = auctionRepository.findById(auctionId);
+
+        if (!aOptional.isPresent()) {
+            return null;
+        }
+
+        Auction auction = aOptional.get();
+        auction.setActive(active);
 
         return auctionRepository.save(auction);
     }
