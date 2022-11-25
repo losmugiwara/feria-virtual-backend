@@ -10,7 +10,6 @@ import com.portafolio.feriavirtual.security.respositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,8 +76,6 @@ public class RequestSaleService implements RequestSaleDao {
         if(approvalStatus == 2){
             rs.setApprovalStatus(ApprovalStatusEnum.REFUSED);
         }
-
-        // rs.setApprovalDate(new Date());
 
         return requestSaleRepository.save(rs);
     }
