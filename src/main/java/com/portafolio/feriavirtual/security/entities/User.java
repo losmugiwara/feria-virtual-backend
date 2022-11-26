@@ -25,8 +25,6 @@ public class User {
 
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userid_generator")
-//    @SequenceGenerator(name = "userid_generator", initialValue = 1, allocationSize = 1, sequenceName = "userid_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
