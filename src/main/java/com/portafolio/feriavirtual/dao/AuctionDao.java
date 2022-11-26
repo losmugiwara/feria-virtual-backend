@@ -10,6 +10,5 @@ public interface AuctionDao {
     List<Auction> getAuctions();
     Optional<Auction> getAuctionById(Long auctionId);
     Auction saveAuction(Long requestSaleId);
-    Auction updateActiveAuctionById(Long auctionId, Integer active);
     Auction updateAuctionById(Long auctionId, Long userId, AuctionDto auctionDto);
 }

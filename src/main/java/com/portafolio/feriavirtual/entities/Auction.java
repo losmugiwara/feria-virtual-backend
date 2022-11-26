@@ -39,7 +39,4 @@ public class Auction {
     @Column(name = "end_date_auction")
     @Null
     private Date endDateAuction;
-
-    @Column(name = "active")
-    private Integer active = 1;
 }

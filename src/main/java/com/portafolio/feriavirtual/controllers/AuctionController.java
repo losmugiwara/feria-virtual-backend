@@ -48,9 +48,4 @@ public class AuctionController {
 
         return ResponseEntity.status(HttpStatus.OK).body(auctionDao.updateAuctionById(auctionId, carrierId, auctionDto));
     }
-
-    @GetMapping("/auction={auctionId}/active={active}")
-    public ResponseEntity<?> updateAuctionActiveById(@PathVariable Long auctionId, @PathVariable Integer active) {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(auctionDao.updateActiveAuctionById(auctionId, active));
-    }
 }

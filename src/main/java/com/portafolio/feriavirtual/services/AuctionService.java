@@ -146,19 +146,4 @@ public class AuctionService implements AuctionDao {
 
         return auctionRepository.save(auction);
     }
-
-    @Override
-    public Auction updateActiveAuctionById(Long auctionId, Integer active) {
-        Optional<Auction> aOptional = auctionRepository.findById(auctionId);
-
-        if (!aOptional.isPresent()) {
-            return null;
-        }
-
-        Auction auction = aOptional.get();
-        auction.setActive(active);
-        auction.setCarrierOffers(null);
-
-        return auctionRepository.save(auction);
-    }
 }
