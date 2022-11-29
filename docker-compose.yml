@@ -6,7 +6,7 @@ services:
       - "9000:9000"
     links:
       - mysql
-  monguito:
+  mysql:
     image: mysql
     ports:
       - "3306:3306"
