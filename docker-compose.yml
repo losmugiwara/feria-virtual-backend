@@ -1,0 +1,21 @@
+version: "1.22.0"
+services:
+  springboot:
+    build: .
+    ports:
+      - "9000:9000"
+    links:
+      - mysql
+  monguito:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+#     volumes:
+#       - mongo-data:/data/db
+#       # mysql -> /var/lib/mysql
+#       # postgres -> /var/lib/postgresql/data
+
+# volumes:
+#   mongo-data:
