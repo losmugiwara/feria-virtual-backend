@@ -1,21 +1,36 @@
 version: "3.3"
 services:
   springboot:
-    build: .
+    build:
+      context: .
+    container_name: app
     ports:
       - "9000:9000"
-    links:
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_NAME=portafolio
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=root
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USERNAME=franciscouribematus@gmail.com
+      - SMTP_PASSWORD=rvgjvjgxxzqroyek
+      - JWT_SECRET=secret
+      - JWT_EXPIRATION=3600
+    networks:
+      - mynet
+    depends_on:
       - mysql
+    restart: on-failure
   mysql:
     image: mysql
+    container_name: mysql
     ports:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=root
-#     volumes:
-#       - mongo-data:/data/db
-#       # mysql -> /var/lib/mysql
-#       # postgres -> /var/lib/postgresql/data
-
-# volumes:
-#   mongo-data:
+      - MYSQL_DATABASE=portafolio
+    networks:
+      - mynet
+networks:
+  mynet:
