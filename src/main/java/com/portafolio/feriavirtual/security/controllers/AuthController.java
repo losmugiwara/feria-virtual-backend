@@ -31,13 +31,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 public class AuthController {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final RoleService roleService;
     private final JwtProvider jwtProvider;
+
     @Autowired
     public AuthController(AuthenticationManagerBuilder authenticationManagerBuilder, PasswordEncoder passwordEncoder,
             UserService userService, RoleService roleService, JwtProvider jwtProvider) {
@@ -47,42 +48,46 @@ public class AuthController {
         this.roleService = roleService;
         this.jwtProvider = jwtProvider;
     }
+
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@Valid @RequestBody LoginUser loginUser, BindingResult bidBindingResult){
-        if(bidBindingResult.hasErrors())
+    public ResponseEntity<Object> login(@Valid @RequestBody LoginUser loginUser, BindingResult bidBindingResult) {
+        if (bidBindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise sus credenciales"), HttpStatus.BAD_REQUEST);
         try {
-                UsernamePasswordAuthenticationToken authenticationToken= new UsernamePasswordAuthenticationToken(loginUser.getUserName(), loginUser.getPassword());
-                Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                String jwt = jwtProvider.generateToken(authentication);
-                JwtDto jwtDto = new JwtDto(jwt);
-                return new ResponseEntity<>(jwtDto, HttpStatus.OK);
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                    loginUser.getUserName(), loginUser.getPassword());
+            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt = jwtProvider.generateToken(authentication);
+            JwtDto jwtDto = new JwtDto(jwt);
+            return new ResponseEntity<>(jwtDto, HttpStatus.OK);
         } catch (Exception e) {
-                return new ResponseEntity<>(new Message("Revise sus credenciales"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Message("Revise sus credenciales"), HttpStatus.BAD_REQUEST);
         }
     }
+
     @PostMapping("/register")
     public ResponseEntity<Object> resgister(@Valid @RequestBody NewUser newUser, BindingResult bindingResult) {
 
-
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
-        
-            User user = new User();
-            user.setUserName(newUser.getUserName());
-            user.setEmail(newUser.getEmail());
-            user.setPassword(passwordEncoder.encode(newUser.getPassword()));
-            user.setName(newUser.getName());
-            user.setLastName(newUser.getLastName());
-            user.setRut(newUser.getRut());
-            user.setBusinessName(newUser.getBusinessName());
-            user.setCountry(newUser.getCountry());
-            user.setCity(newUser.getCity());
-            user.setCommune(newUser.getCommune());
-            user.setAddress(newUser.getAddress());
-        
-                Set<Role> roles = new HashSet<>();
+
+        User user = new User();
+        user.setUserName(newUser.getUserName());
+        user.setEmail(newUser.getEmail());
+        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        user.setName(newUser.getName());
+        user.setLastName(newUser.getLastName());
+        user.setRut(newUser.getRut());
+        user.setBusinessName(newUser.getBusinessName());
+        user.setCountry(newUser.getCountry());
+        user.setCity(newUser.getCity());
+        user.setCommune(newUser.getCommune());
+        user.setAddress(newUser.getAddress());
+
+        System.out.println(newUser.getRoles());
+
+        Set<Role> roles = new HashSet<>();
         if (newUser.getRoles().contains("ROLE_CUSTOMER_EXTERNAL"))
             roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
         if (newUser.getRoles().contains("ROLE_CUSTOMER_INTERNAL"))
@@ -93,14 +98,16 @@ public class AuthController {
             roles.add(roleService.getByRoleName(RoleList.ROLE_CARRIER).get());
         if (newUser.getRoles().contains("ROLE_PRODUCER"))
             roles.add(roleService.getByRoleName(RoleList.ROLE_PRODUCER).get());
+        if (newUser.getRoles().contains("ROLE_ADMIN"))
+            roles.add(roleService.getByRoleName(RoleList.ROLE_ADMIN).get());
         user.setRoles(roles);
         userService.save(user);
         return new ResponseEntity<>(new Message("Usuario creado con exito!"), HttpStatus.CREATED);
 
-
         // if (bindingResult.hasErrors())
-        //     return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
-            
+        // return new ResponseEntity<>(new Message("Revise los campos e intente
+        // nuevamente"), HttpStatus.BAD_REQUEST);
+
         // User user = new User();
         // user.setUserName(newUser.getUserName());
         // user.setEmail(newUser.getEmail());
@@ -109,25 +116,23 @@ public class AuthController {
         // user.setLastName(newUser.getLastName());
         // Set<Role> roles = new HashSet<>();
         // if (newUser.getRoles().contains("ROLE_CUSTOMER_EXTERNAL"))
-        //     roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
+        // roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
         // if (newUser.getRoles().contains("ROLE_ADMIN"))
-        //     roles.add(roleService.getByRoleName(RoleList.ROLE_ADMIN).get());
+        // roles.add(roleService.getByRoleName(RoleList.ROLE_ADMIN).get());
         // user.setRoles(roles);
 
-
         // if(userService.save(user)){
-        //     return new ResponseEntity<>(new Message("Registro exitoso! Inicie sesión"), HttpStatus.CREATED);
+        // return new ResponseEntity<>(new Message("Registro exitoso! Inicie sesión"),
+        // HttpStatus.CREATED);
         // }
-        // return new ResponseEntity<>(new Message("Credenciales en uso, intenta con otro usuario o email"), HttpStatus.OK);
-        
-        
-        
-        
+        // return new ResponseEntity<>(new Message("Credenciales en uso, intenta con
+        // otro usuario o email"), HttpStatus.OK);
+
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/users")
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
@@ -137,21 +142,21 @@ public class AuthController {
 
         if (bindingResult.hasErrors())
             return new ResponseEntity<>(new Message("Revise los campos e intente nuevamente"), HttpStatus.BAD_REQUEST);
-        
-            User user = new User();
-            user.setUserName(newUser.getUserName());
-            user.setEmail(newUser.getEmail());
-            user.setPassword(passwordEncoder.encode(newUser.getPassword()));
-            user.setName(newUser.getName());
-            user.setLastName(newUser.getLastName());
-            user.setRut(newUser.getRut());
-            user.setBusinessName(newUser.getBusinessName());
-            user.setCountry(newUser.getCountry());
-            user.setCity(newUser.getCity());
-            user.setCommune(newUser.getCommune());
-            user.setAddress(newUser.getAddress());
-        
-                Set<Role> roles = new HashSet<>();
+
+        User user = new User();
+        user.setUserName(newUser.getUserName());
+        user.setEmail(newUser.getEmail());
+        user.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        user.setName(newUser.getName());
+        user.setLastName(newUser.getLastName());
+        user.setRut(newUser.getRut());
+        user.setBusinessName(newUser.getBusinessName());
+        user.setCountry(newUser.getCountry());
+        user.setCity(newUser.getCity());
+        user.setCommune(newUser.getCommune());
+        user.setAddress(newUser.getAddress());
+
+        Set<Role> roles = new HashSet<>();
         if (newUser.getRoles().contains("ROLE_CUSTOMER_EXTERNAL"))
             roles.add(roleService.getByRoleName(RoleList.ROLE_CUSTOMER_EXTERNAL).get());
         if (newUser.getRoles().contains("ROLE_CUSTOMER_INTERNAL"))
@@ -167,10 +172,9 @@ public class AuthController {
         return new ResponseEntity<>(new Message("Usuario creado con exito!"), HttpStatus.CREATED);
     }
 
-
     @GetMapping("/profile/{userName}")
-    public ResponseEntity<?> getUserByUsername(@PathVariable String userName){
+    public ResponseEntity<?> getUserByUsername(@PathVariable String userName) {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.getByUserName(userName));
-    } 
+    }
 
 }

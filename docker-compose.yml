@@ -11,6 +11,16 @@ services:
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
 
+      - SPRING_EMAIL_HOST=smtp.gmail.com
+      - SPRING_EMAIL_PORT=587
+      - SPRING_EMAIL_USERNAME=franciscouribematus@gmail.com
+      - SPRING_EMAIL_PASSWORD=rvgjvjgxxzqroyek
+      - SPRING_EMAIL_PROPERTIES_MAIL_SMTP_AUTH=true
+      - SPRING_EMAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true
+      
+      - JWT_SECRET=secret
+      - JWT_EXPIRATION=3600
+
       # - DATABASE_HOST=mysql
       # - DATABASE_NAME=portafolio
       # - DATABASE_USERNAME=root
@@ -34,7 +44,12 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=portafolio
+    # volumes:
+      # - mysql-data:/var/lib/mysql
     networks:
       - mynet
 networks:
   mynet:
+
+# volumes:
+#   mysql-data:
