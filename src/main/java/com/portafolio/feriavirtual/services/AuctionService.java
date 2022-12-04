@@ -132,6 +132,10 @@ public class AuctionService implements AuctionDao {
 
             saleRepository.save(sale);
 
+            //auction end date
+            auction.setEndDateAuction(new Date());
+            auctionRepository.save(auction);
+
             // Instancia para contract y relacionarlo con sale
             Contract contract = new Contract();
             contract.setSale(sale);
