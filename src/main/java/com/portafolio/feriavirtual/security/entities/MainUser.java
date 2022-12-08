@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class MainUser implements UserDetails {
+    private Long id;
     private String userName;
     private String email;
     private String password;
@@ -17,9 +18,10 @@ public class MainUser implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
 
-    public MainUser(String userName, String email, String password,
+    public MainUser(Long id, String userName, String email, String password,
             String name, String lastName,
             Collection<? extends GrantedAuthority> authorities) {
+        this.id = id;
         this.userName = userName;
         this.email = email;
         this.password = password;
@@ -30,7 +32,7 @@ public class MainUser implements UserDetails {
 
     public static MainUser build(User user){
         List<GrantedAuthority> authorities = user.getRoles().stream().map(role-> new SimpleGrantedAuthority(role.getRoleName().name())).collect(Collectors.toList());
-        return new MainUser(user.getUserName(), user.getEmail(), user.getPassword(), user.getName(), user.getLastName(), authorities);
+        return new MainUser(user.getId(), user.getUserName(), user.getEmail(), user.getPassword(), user.getName(), user.getLastName(), authorities);
     }
     
     @Override
@@ -79,6 +81,10 @@ public class MainUser implements UserDetails {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public Long getId(){
+        return id;
     }
     
 }

@@ -1,13 +1,18 @@
 package com.portafolio.feriavirtual.security.jwt;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import com.portafolio.feriavirtual.security.entities.User;
+import com.portafolio.feriavirtual.security.respositories.UserRepository;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -31,11 +36,24 @@ public class JwtProvider {
     @Value("${jwt.expiration}")
     private int expiration;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public String generateToken(Authentication authentication){
         UserDetails mainUser = (UserDetails) authentication.getPrincipal();
 
+        Optional<User> uo = userRepository.findByUserName(mainUser.getUsername());
+        
+        if (!uo.isPresent()){
+            return null;
+        }
+
+        User user = uo.get();
+
+
         logger.error(mainUser.getUsername());
         return Jwts.builder().setSubject(mainUser.getUsername()).claim("roles", mainUser.getAuthorities())
+        .claim("id", user.getId())
         .setIssuedAt(new Date())
         .setExpiration(new Date(new Date().getTime() + expiration *1000))
         .signWith(SignatureAlgorithm.HS512, secret)
