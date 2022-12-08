@@ -12,4 +12,5 @@ public interface ProductDao {
     Product saveProduct(ProductDto productDto, Long userId, Long categoryId, Long qualityId);
     Optional<Product> updateProductById(Long idProduct, Product product);
     void deleteProductById(Long idProduct);
+    List<Product> getProductsByUser(Long idUser);
 }

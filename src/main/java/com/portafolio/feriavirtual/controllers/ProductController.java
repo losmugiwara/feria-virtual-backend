@@ -30,6 +30,12 @@ public class ProductController {
         return new ResponseEntity<>(foundProducts, HttpStatus.OK);
     }
 
+    @GetMapping("/user={idUser}")
+    public ResponseEntity<List<Product>> getProductsByUser(@PathVariable Long idUser){
+        List<Product> foundProducts = productDao.getProductsByUser(idUser);
+        return new ResponseEntity<>(foundProducts, HttpStatus.OK);
+    }
+
     @GetMapping("/product={productId}")
     public ResponseEntity<?> getProduct(@PathVariable Long productId){
         return ResponseEntity.status(HttpStatus.OK).body(productDao.getProductById(productId));

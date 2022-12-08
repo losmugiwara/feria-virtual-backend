@@ -14,4 +14,5 @@ public class ProductDto {
     private Double price;
     private Integer stock;
     private String urlImage;
+    private Double kilogram;
 }

@@ -42,6 +42,8 @@ public class Product {
     @Column(name = "url_image")
     private String urlImage;
 
+    @Column(name = "kilogram")
+    private Double kilogram;
 
 }
 

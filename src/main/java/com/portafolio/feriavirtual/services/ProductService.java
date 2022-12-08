@@ -14,7 +14,6 @@ import com.portafolio.feriavirtual.security.respositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -32,10 +31,11 @@ public class ProductService implements ProductDao {
 
     @Autowired
     private QualityRepository qualityRepository;
+
     @Override
     public void deleteProductById(Long idProduct) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -66,17 +66,17 @@ public class ProductService implements ProductDao {
         Optional<Category> categoryOptional = categoryRepository.findById(categoryId);
         Optional<Quality> qualityOptional = qualityRepository.findById(qualityId);
 
-        if(!userOptional.isPresent()){
+        if (!userOptional.isPresent()) {
             System.out.println("no encontro el usuario");
             return null;
         }
 
-        if(!qualityOptional.isPresent()){
+        if (!qualityOptional.isPresent()) {
             System.out.println("no encontro la calidad");
             return null;
         }
 
-        if(!categoryOptional.isPresent()){
+        if (!categoryOptional.isPresent()) {
             System.out.println("no se encontro la categoria");
             return null;
         }
@@ -89,19 +89,19 @@ public class ProductService implements ProductDao {
         product.setStock(productDto.getStock());
         product.setPrice(productDto.getPrice());
         product.setUrlImage(productDto.getUrlImage());
+        product.setKilogram(productDto.getKilogram());
 
-        if(product.getPrice() <= 0){
+        if (product.getPrice() <= 0) {
             return null;
         }
 
-        if (product.getStock() == 0){
+        if (product.getStock() == 0) {
             product.setProductState(0);
         }
 
-        if (product.getStock() == 0){
+        if (product.getStock() == 0) {
             return null;
         }
-
 
         product.setProductState(1);
         product.setCategory(category);
@@ -116,6 +116,16 @@ public class ProductService implements ProductDao {
         return Optional.empty();
     }
 
+    @Override
+    public List<Product> getProductsByUser(Long idUser) {
+       
+        Optional<User> uo = userRepository.findById(idUser);
 
+        if (!uo.isPresent()) return null;
+       
+        User user = uo.get();
+
+        return productRepository.findByUser(user);
+    }
 
 }
