@@ -1,6 +1,5 @@
 package com.portafolio.feriavirtual.dto;
 
-import com.portafolio.feriavirtual.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

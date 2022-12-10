@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Null;
 
 @Entity
 @Table(name = "products")
@@ -38,7 +37,6 @@ public class Product {
     @JoinColumn(name = "quality_id")
     private Quality quality;
 
-    @Null
     @Column(name = "url_image")
     private String urlImage;
 
