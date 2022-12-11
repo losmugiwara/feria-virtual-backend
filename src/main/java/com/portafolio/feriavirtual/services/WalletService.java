@@ -48,7 +48,13 @@ public class WalletService implements WalletDao{
 
         User customer = userOptional.get();
 
+
         Wallet wallet = wr.getWalletByCustomerId(customer.getId());
+
+        if(wallet == null){
+            return null;
+        };
+
         wallet.setAmount(wallerDto.getAmount());
         return wr.save(wallet);
     }
@@ -65,7 +71,9 @@ public class WalletService implements WalletDao{
 
         Wallet wallet = wr.getWalletByCustomerId(customer.getId());
 
-        if (wallet == null) return null;
+        if(wallet == null){
+            return null;
+        };
     
         return wallet;
     }

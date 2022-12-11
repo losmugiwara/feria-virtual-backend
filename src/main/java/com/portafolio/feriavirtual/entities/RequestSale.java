@@ -32,7 +32,6 @@ public class RequestSale {
     private List<Product> products;
 
     @Column(name = "shipping_address")
-    @NotNull
     private String shippingAddress;
 
     @Column(name = "created_date")

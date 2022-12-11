@@ -1,12 +1,15 @@
 package com.portafolio.feriavirtual.services;
 
 import com.portafolio.feriavirtual.dao.RequestSaleDao;
+import com.portafolio.feriavirtual.dto.ProductItem;
 import com.portafolio.feriavirtual.dto.RequestSaleDto;
 import com.portafolio.feriavirtual.entities.Product;
 import com.portafolio.feriavirtual.entities.RequestSale;
+import com.portafolio.feriavirtual.entities.Wallet;
 import com.portafolio.feriavirtual.entities.enums.ApprovalStatusEnum;
 import com.portafolio.feriavirtual.repositories.ProductRepository;
 import com.portafolio.feriavirtual.repositories.RequestSaleRepository;
+import com.portafolio.feriavirtual.repositories.WalletRepository;
 import com.portafolio.feriavirtual.security.entities.User;
 import com.portafolio.feriavirtual.security.respositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,9 @@ public class RequestSaleService implements RequestSaleDao {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private WalletRepository walletRepository;
 
     @Override
     public List<RequestSale> getRequestsSale() {
@@ -58,12 +64,18 @@ public class RequestSaleService implements RequestSaleDao {
 
         user = userOptional.get();
 
+        Wallet wo = walletRepository.getWalletByCustomerId(user.getId());
+
+        if(wo == null) return null;
+
         rs.setUser(user);
 
 
+        double totalRequest = 0.0;
+
         List<Product> products = new ArrayList<>();
 
-        requestSaleDto.getProductsItem().stream().map(p -> {
+        for( ProductItem p: requestSaleDto.getProductsItem() ){
             Product prod = productRepository.findById(p.getIdProduct()).orElse(null);
             
             if (p.getCount() > prod.getStock()){
@@ -71,14 +83,22 @@ public class RequestSaleService implements RequestSaleDao {
             }
 
             prod.setStock(p.getCount());
+
+            totalRequest += p.getCount() * prod.getPrice();
             
             Product productUpdated = productRepository.save(prod);
 
             products.add(productUpdated);
+        }
 
-            return prod;
-        });
-        
+                
+        if (wo.getAmount() < totalRequest){
+            return null;
+        }
+
+        wo.setAmount(wo.getAmount() - totalRequest);
+        walletRepository.save(wo);
+
         rs.setProducts(products);
         
         rs.setShippingAddress(requestSaleDto.getShippingAddress());
