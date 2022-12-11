@@ -82,7 +82,7 @@ public class RequestSaleService implements RequestSaleDao {
                 return null;
             }
 
-            prod.setStock(p.getCount());
+            prod.setStock(prod.getStock() - p.getCount());
 
             totalRequest += p.getCount() * prod.getPrice();
             
