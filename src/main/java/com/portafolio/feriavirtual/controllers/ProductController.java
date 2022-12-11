@@ -49,5 +49,16 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productDao.saveProduct(productDto, userId, categoryId, qualityId));
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_PRODUCER', 'ROLE_ADMIN')")
+    @PutMapping("/productId={productId}/quality={qualityId}")
+    public ResponseEntity<?> updateProduct(@Valid @RequestBody ProductDto productDto, @PathVariable Long productId, @PathVariable Long qualityId, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return new ResponseEntity<>(new Message("Los campos ingresados son incorrectos"), HttpStatus.BAD_REQUEST);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(productDao.updateProductById(productId, productDto, qualityId));
+    }
+
+
+
 
 }

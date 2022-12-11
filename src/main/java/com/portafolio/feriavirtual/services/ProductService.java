@@ -111,9 +111,26 @@ public class ProductService implements ProductDao {
     }
 
     @Override
-    public Optional<Product> updateProductById(Long idProduct, Product product) {
-        // TODO Auto-generated method stub
-        return Optional.empty();
+    public Product updateProductById(Long idProduct, ProductDto productDto, Long idQuality) {
+
+        Optional<Product> po = productRepository.findById(idProduct);
+        Optional<Quality> qo = qualityRepository.findById(idQuality);
+
+        if (!po.isPresent()) return null;
+        if (!qo.isPresent()) return null;
+
+        Product product = po.get();
+        Quality quality = qo.get();
+
+
+        product.setQuality(quality);
+        product.setNameProduct(productDto.getNameProduct());
+        product.setPrice(productDto.getPrice());
+        product.setStock(productDto.getStock());
+        product.setUrlImage(productDto.getUrlImage());
+        product.setKilogram(productDto.getKilogram());
+
+        return productRepository.save(product);
     }
 
     @Override
