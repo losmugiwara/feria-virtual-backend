@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +28,6 @@ public class Auction {
     private RequestSale requestSale;
 
     @ManyToMany
-    @Null
     private List<CarrierOffer> carrierOffers;
 
     @Column(name = "start_date_auction")
@@ -37,6 +35,5 @@ public class Auction {
     private Date startDateAuction = new Date();
 
     @Column(name = "end_date_auction")
-    @Null
     private Date endDateAuction;
 }
