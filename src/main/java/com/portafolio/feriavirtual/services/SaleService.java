@@ -82,6 +82,9 @@ public class SaleService implements SaleDao {
 
             Sale sale = saleOptional.get();
 
+            if (saleStatusEnum == 0) {
+                sale.setSaleStatusEnum(SaleStatusEnum.WAREHOUSE);
+            }
             if (saleStatusEnum == 1) {
                 sale.setSaleStatusEnum(SaleStatusEnum.PACKAGE);
             }
